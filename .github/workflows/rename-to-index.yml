@@ -1,0 +1,22 @@
+name: Rename site file to index.html
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename file to index.html
+        run: |
+          if [ -f anime-streaming-website.html ]; then
+            git mv anime-streaming-website.html index.html
+            git config user.name "sksabbirbos9133-commits"
+            git config user.email "sksabbirbos9133-commits@users.noreply.github.com"
+            git commit -m "Rename anime-streaming-website.html to index.html"
+            git push
+          else
+            echo "Source file not found"
+            exit 1
+          fi
